@@ -1,4 +1,4 @@
-module outcome
+module github.com/kentoSugawara/outcome
 
 go 1.19
 

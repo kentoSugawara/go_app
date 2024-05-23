@@ -21,6 +21,7 @@ func main() {
     repo := &repository.ItemRepository{DB: db}
     svc := &service.ItemService{Repo: repo}
 
+	http.HandleFunc("/login", service.ServeLoginFile) 
     http.HandleFunc("/list", svc.ListItems)
 
     log.Println("Listening on :8080...")

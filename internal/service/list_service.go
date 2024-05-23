@@ -4,7 +4,6 @@ import (
     "net/http"
     "text/template"
 
-    "github.com/kentoSugawara/outcome/internal/model"
     "github.com/kentoSugawara/outcome/internal/repository"
 )
 
