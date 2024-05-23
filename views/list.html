@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>一覧画面</title>
+</head>
+<body>
+    <h1>一覧画面</h1>
+    {{range .}}
+    <p>ユーザー1：{{.Title}}：{{.Url}}</p>
+    <p>{{.TagBody}}：{{.Body}}</p>
+    {{end}}
+</body>
+</html>
