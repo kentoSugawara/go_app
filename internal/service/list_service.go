@@ -2,7 +2,7 @@ package service
 
 import (
     "net/http"
-    "text/template"
+    "encoding/json"
 
     "github.com/kentoSugawara/outcome/internal/repository"
 )
@@ -11,21 +11,14 @@ type ItemService struct {
     Repo *repository.ItemRepository
 }
 
-func (svc *ItemService) ListItems(w http.ResponseWriter, r *http.Request) {
-    items, err := svc.Repo.GetItems()
+func (s *ItemService) ListItems(w http.ResponseWriter, r *http.Request) {
+    items, err := s.Repo.GetItems()
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
 
-    tmpl, err := template.ParseFiles("./views/list.html")
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-    }
-
-    err = tmpl.Execute(w, items)
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-    }
+    w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+    json.NewEncoder(w).Encode(items)
 }

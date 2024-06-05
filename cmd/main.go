@@ -21,8 +21,10 @@ func main() {
     repo := &repository.ItemRepository{DB: db}
     svc := &service.ItemService{Repo: repo}
 
-	http.HandleFunc("/login", service.ServeLoginFile) 
     http.HandleFunc("/list", svc.ListItems)
+
+    fs := http.FileServer(http.Dir("./app/build"))
+    http.Handle("/", fs)
 
     log.Println("Listening on :8080...")
     err = http.ListenAndServe(":8080", nil)
